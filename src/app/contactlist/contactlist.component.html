@@ -1,0 +1,104 @@
+<div  class="searchfilter">
+  <span>Filter:</span>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select an plan-name</mat-label>
+    <mat-select [(value)]="selected"   [(ngModel)]="searchReport.planname">
+      <mat-option value="">--select plan name--</mat-option>
+      <mat-option  *ngFor="let link of plannames" value="{{link}}">{{link}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select an plan-status</mat-label>
+    <mat-select [(value)]="selected1"  [(ngModel)]="searchReport.planstatus">
+      <mat-option value="">--select plan status--</mat-option>
+      <mat-option  *ngFor="let link of planstatuss" value="{{link}}"> {{ link }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Select a Gender</mat-label>
+    <mat-select [(value)]="selected2"  [(ngModel)]="searchReport.gender">
+      <mat-option value="">--select Gender--</mat-option>
+      <mat-option value="male">Male</mat-option>
+      <mat-option value="female">Female</mat-option>
+      <mat-option value="others">Others</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <div class="btnsearch">
+    <button mat-raised-button color="primary" (click)="getEmployeeList()">Search</button>
+  </div>
+</div>
+
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- ssn Column -->
+      <ng-container matColumnDef="ssn">
+        <th mat-header-cell *matHeaderCellDef> SSN </th>
+        <td mat-cell *matCellDef="let element"> {{element.ssn}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="planname">
+        <th mat-header-cell *matHeaderCellDef> PlanName </th>
+        <td mat-cell *matCellDef="let element"> {{element.planname}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="planstatus">
+        <th mat-header-cell *matHeaderCellDef> PlanStatus </th>
+        <td mat-cell *matCellDef="let element"> {{element.planstatus}} </td>
+      </ng-container>
+
+        <!-- gender Column -->
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef> Gender </th>
+          <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+        </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+   <div class="footpage">
+    <!-- <div class="excel">
+      <button mat-raised-button color="primary" (click)="exportToExcel()">Download excel</button>
+      <button mat-raised-button color="primary" (click)="exportToPdf()">Download pdf</button>
+    </div> -->
+
+    <div class="excel">
+    
+      <!-- (click)="exportToExcel()" -->
+      <!-- <a target="_blank"> -->
+        <button class="btn btn-success" (click)="exportToExcel()">
+          Export <i class="fa fa-file-excel-o" aria-hidden="true"></i></button>
+      <!-- </a> -->
+        <button class="btn btn-danger" (click)="exportToPdf()">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> 
+      <!-- </a> -->
+    </div>
+    <!-- <a class="btn btn-success" (click)="exportToExcel()"> <i class="fa fa-plus-square"></i> Excel</a> -->
+    
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+                 
+    </mat-paginator>
+  </div>
+
+ 
+        </div>
